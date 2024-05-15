@@ -28,11 +28,26 @@ namespace card
     {
         card_balance -= amount1;
     }
+
+    void Card::AddBalance(int balance1)
+    {
+        card_balance += balance1;
+    }
     
     Wallet::Wallet(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>>& ListofCards)
             : Card(card_name1, card_balance1, ListofCards), name(card_name1), balance(card_balance1)
         {
         }
+
+    void Wallet::AddBalance(int balance1)
+    {
+        balance += balance1;
+    }
+
+    int Wallet::PrintBalance()
+    {
+        return balance;
+    }
 
 
     DebitCard::DebitCard(std::string card_name1, int card_balance1, int card_number1, std::vector<std::pair<std::string, int>>& ListofCards)

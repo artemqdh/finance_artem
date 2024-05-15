@@ -9,11 +9,12 @@ namespace card
     class Card
     {
     public:
-        Card(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>>& ListofCards);
+        Card(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards);
 
-        void AddCardtoList(std::string card_number1, int card_balance1, std::vector<std::pair<std::string, int>>& ListofCards);
-        void PrintBalance(std::vector<std::pair<std::string, int>>& ListofCards) const;
-        virtual void WithdrawCard(int amount1);
+        void AddCardtoList(std::string card_number1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards);
+        void PrintBalance(std::vector<std::pair<std::string, int>> ListofCards) const;
+        void WithdrawCard(int amount1);
+        void AddBalance(int balance1);
 
     protected:
         std::string card_name;
@@ -23,7 +24,9 @@ namespace card
     class Wallet : public Card
     {
     public:
-        Wallet(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>>& ListofCards);
+        Wallet(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards);
+        void AddBalance(int balance1);
+        int PrintBalance();
 
     private:
         std::string name;
@@ -33,7 +36,7 @@ namespace card
     class DebitCard : public Card
     {
     public:
-        DebitCard(std::string card_name1, int card_balance1, int card_number1, std::vector<std::pair<std::string, int>>& ListofCards);
+        DebitCard(std::string card_name1, int card_balance1, int card_number1, std::vector<std::pair<std::string, int>> ListofCards);
 
     private:
         int card_number;
@@ -42,7 +45,7 @@ namespace card
     class CreditCard : public Card
     {
     public:
-        CreditCard(std::string card_name1, int card_balance1, std::string expiration_date1, std::vector<std::pair<std::string, int>>& ListofCards);
+        CreditCard(std::string card_name1, int card_balance1, std::string expiration_date1, std::vector<std::pair<std::string, int>> ListofCards);
 
     private:
         std::string expiration_date;
