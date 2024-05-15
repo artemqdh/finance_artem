@@ -45,6 +45,7 @@ int main()
 
         std::cout << "1 - Buy something" << std::endl;
         std::cout << "2 - Add money" << std::endl;
+        std::cout << "3 - Print something" << std::endl;
 
         std::cin >> num;
 
@@ -75,6 +76,8 @@ int main()
                         ListofExpenses.push_back(new_expense);
 
                         new_credit_card.WithdrawCard(amount1);
+
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                     case 2:
@@ -89,6 +92,7 @@ int main()
                         ListofExpenses.push_back(new_expense);
 
                         new_debit_card.WithdrawCard(amount1);
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                     case 3:
@@ -103,6 +107,7 @@ int main()
                         ListofExpenses.push_back(new_expense);
 
                         new_wallet.WithdrawCard(amount1);
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                 }break;
@@ -127,7 +132,7 @@ int main()
                         std::cin >> amount1;
                     
                         new_credit_card.AddBalance(amount1);
-
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                     case 2:
@@ -137,7 +142,7 @@ int main()
                         std::cin >> amount1;
 
                         new_debit_card.AddBalance(amount1);
-
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                     case 3:
@@ -147,10 +152,27 @@ int main()
                         std::cin >> amount1;
 
                         new_wallet.AddBalance(amount1);
-
+                        std::cout << "Success." << std::endl;
                         break;
                     }
                 }break;
+            }
+            case 3:
+            {
+                int num3;
+                std::cout << "    " << std::endl;
+
+                std::cout << "1 - " << std::endl;
+                std::cout << "2 - " << std::endl;
+                std::cout << "3 - " << std::endl;
+                std::cout << "4 - " << std::endl;
+
+                std::cin >> num3;
+
+                switch (num3)
+                {
+
+                }
             }
         }
     }
