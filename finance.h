@@ -11,8 +11,8 @@ namespace card
     public:
         Card(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards);
 
-        void AddCardtoList(std::string card_number1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards);
-        void PrintBalance(std::vector<std::pair<std::string, int>> ListofCards) const;
+        void AddCardtoList(std::string card_number1, int card_balance1, std::vector<std::pair<std::string, int>>& ListofCards);
+        void PrintBalance(std::vector<std::pair<std::string, int>>& ListofCards) const;
         void WithdrawCard(int amount1);
         void AddBalance(int balance1);
 

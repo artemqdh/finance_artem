@@ -43,21 +43,21 @@ int main()
         std::cout << "---------------------------------------" << std::endl;
         std::cout << "What do you want to do?" << std::endl;
 
-        std::cout << "1 - Add a new Card" << std::endl;
-        std::cout << "2 - Buy something" << std::endl;
-        std::cout << "3 - Add money" << std::endl;
+        std::cout << "1 - Buy something" << std::endl;
+        std::cout << "2 - Add money" << std::endl;
 
         std::cin >> num;
 
         switch (num)
         {
-            case 1: 
+            case 1:
             {
                 int num1;
-                std::cout << "What do you want to do?" << std::endl;
+                std::cout << "From what card or wallet are you buying?" << std::endl;
 
-                std::cout << "1 - Add Credit Card" << std::endl;
-                std::cout << "2 - Add Debit Card" << std::endl;
+                std::cout << "1 - Credit Card" << std::endl;
+                std::cout << "2 - Debit Card" << std::endl;
+                std::cout << "3 - Wallet" << std::endl;
 
                 std::cin >> num1;
 
@@ -65,32 +65,92 @@ int main()
                 {
                     case 1:
                     {
+                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
                         std::string name1;
-                        int balance1 = 0;
-                        int creditcard_number1;
-                        std::cout << "Type in your name, balance and creditcard number:" << std::endl;
-                        std::cin >> name1 >> balance1 >> creditcard_number1;
-                        card::CreditCard creditcard_new(name1, balance1, creditcard_number1, ListofCards);
+                        int amount1 = 0;
+                        std::string date1;
+                        std::string category1;
+                        expenses::Expenses new_expense(amount1, name1, date1, category1);
+
+                        ListofExpenses.push_back(new_expense);
+
+                        new_credit_card.WithdrawCard(amount1);
                         break;
                     }
                     case 2:
                     {
+                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
                         std::string name1;
-                        int balance1 = 0;
-                        std::string expirydate;
-                        std::cout << "Type in your name, balance and finish data of the card:" << std::endl;
-                        std::cin >> name1 >> balance1 >> expirydate;
-                        card::DebitCard debitcard_new(name1, balance1, expirydate, ListofCards);
+                        int amount1 = 0;
+                        std::string date1;
+                        std::string category1;
+                        expenses::Expenses new_expense(amount1, name1, date1, category1);
+
+                        ListofExpenses.push_back(new_expense);
+
+                        new_debit_card.WithdrawCard(amount1);
                         break;
                     }
-                }
+                    case 3:
+                    {
+                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
+                        std::string name1;
+                        int amount1 = 0;
+                        std::string date1;
+                        std::string category1;
+                        expenses::Expenses new_expense(amount1, name1, date1, category1);
+
+                        ListofExpenses.push_back(new_expense);
+
+                        new_wallet.WithdrawCard(amount1);
+                        break;
+                    }
+                }break;
             }
             case 2:
             {
-                int num;
-                std::cout << "From what card or wallet are you buying?" << std::endl;
+                int num2;
+                std::cout << "Where do you want to add money?" << std::endl;
 
-                std::cout << 
+                std::cout << "1 - Credit Card" << std::endl;
+                std::cout << "2 - Debit Card" << std::endl;
+                std::cout << "3 - Wallet" << std::endl;
+
+                std::cin >> num2;
+                
+                switch (num2)
+                {
+                    case 1:
+                    {
+                        std::cout << "How much money do you want to add?" << std::endl;
+                        int amount1;
+                        std::cin >> amount1;
+                    
+                        new_credit_card.AddBalance(amount1);
+
+                        break;
+                    }
+                    case 2:
+                    {
+                        std::cout << "How much money do you want to add?" << std::endl;
+                        int amount1;
+                        std::cin >> amount1;
+
+                        new_debit_card.AddBalance(amount1);
+
+                        break;
+                    }
+                    case 3:
+                    {
+                        std::cout << "How much money do you want to add?" << std::endl;
+                        int amount1;
+                        std::cin >> amount1;
+
+                        new_wallet.AddBalance(amount1);
+
+                        break;
+                    }
+                }break;
             }
         }
     }
