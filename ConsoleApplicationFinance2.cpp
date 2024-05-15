@@ -35,52 +35,63 @@ int main()
 
     PrintAll(ListofExpenses);
 
-    /*while (1 == 1) {
+    while (1 == 1) 
+    {
         int num;
-        cout << "---------------------------------------" << endl;
-        cout << "----------WELCOME TO FINANCE-----------" << endl;
-        cout << "---------------------------------------" << endl;
-        cout << "What do you want to do?" << endl;
-        cout << "Add new Credit Card - 1" << endl;
-        cout << "Print Balance of Wallet - 2" << endl;
-        cout << "Print All Cards with their Balance - 3" << endl;
-        cout << "Add Balance to Wallet - 4" << endl;
-        cout << "Withdraw from Wallet - 5" << endl;
+        std::cout << "---------------------------------------" << std::endl;
+        std::cout << "----------WELCOME TO FINANCE-----------" << std::endl;
+        std::cout << "---------------------------------------" << std::endl;
+        std::cout << "What do you want to do?" << std::endl;
 
-        cin >> num;
+        std::cout << "1 - Add a new Card" << std::endl;
+        std::cout << "2 - Buy something" << std::endl;
+        std::cout << "3 - Add money" << std::endl;
 
-        switch (num) {
-        case 1: {
-            string a;
-            int b;
-            cout << "Type in the card name and balance:" << endl;
-            cin >> a >> b;
-            new_credit_card.AddCardtoList(a, b);
-            break;
-        }
-        case 2: {
-            new_wallet.PrintBalance();
-            break;
-        }
-        case 3: {
-            cout << "Here are the Balances of each Card: " << endl;
-            for (const auto& a : ListofCards) {
-                cout << "'Card Number:' " << a.first << " Balance: " << a.second << endl;
+        std::cin >> num;
+
+        switch (num)
+        {
+            case 1: 
+            {
+                int num1;
+                std::cout << "What do you want to do?" << std::endl;
+
+                std::cout << "1 - Add Credit Card" << std::endl;
+                std::cout << "2 - Add Debit Card" << std::endl;
+
+                std::cin >> num1;
+
+                switch (num1)
+                {
+                    case 1:
+                    {
+                        std::string name1;
+                        int balance1 = 0;
+                        int creditcard_number1;
+                        std::cout << "Type in your name, balance and creditcard number:" << std::endl;
+                        std::cin >> name1 >> balance1 >> creditcard_number1;
+                        card::CreditCard creditcard_new(name1, balance1, creditcard_number1, ListofCards);
+                        break;
+                    }
+                    case 2:
+                    {
+                        std::string name1;
+                        int balance1 = 0;
+                        std::string expirydate;
+                        std::cout << "Type in your name, balance and finish data of the card:" << std::endl;
+                        std::cin >> name1 >> balance1 >> expirydate;
+                        card::DebitCard debitcard_new(name1, balance1, expirydate, ListofCards);
+                        break;
+                    }
+                }
             }
-            break;
-        }
-        case 4: {
-            cout << "How much money do you want to add?" << endl;
-            int a = 0;
-            cin >> a;
+            case 2:
+            {
+                int num;
+                std::cout << "From what card or wallet are you buying?" << std::endl;
 
-            new_wallet.AddBalance(a);
-            break;
+                std::cout << 
+            }
         }
-        case 5: {
-            new_wallet.WithdrawBalance();
-            break;
-        }
-        }
-    }*/
+    }
 }
