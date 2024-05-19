@@ -26,8 +26,9 @@ namespace expenses
 
         void FuncDate(std::string dateStr);
     };
-
+    void printTop3ExpensesByCategory(std::vector<Expenses*> ListofExpenses);
     void printTop3Expenses(std::vector<Expenses>& ListofExpenses);
-    void printTop3ExpensesByCategory(std::vector<Expenses>& ListofExpenses);
+    
+
     void PrintAll(std::vector<Expenses>& ListofExpenses);
 }
