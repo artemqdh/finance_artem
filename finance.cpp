@@ -26,7 +26,15 @@ namespace card
 
     void Card::WithdrawCard(int amount1)
     {
-        card_balance -= amount1;
+        if (amount1 < this->card_balance)
+        {
+            this->card_balance -= amount1;
+            std::cout << "Success." << std::endl;
+        }
+        else
+        {
+            std::cout << "The Balance is lower than your amount!!! This is your Balance: " << this->card_balance << std::endl;
+        }
     }
 
     void Card::AddBalance(int balance1)
@@ -35,20 +43,19 @@ namespace card
     }
     
     Wallet::Wallet(std::string card_name1, int card_balance1, std::vector<std::pair<std::string, int>> ListofCards)
-            : Card(card_name1, card_balance1, ListofCards), name(card_name1), balance(card_balance1)
+            : Card(card_name1, card_balance1, ListofCards)
         {
         }
 
     void Wallet::AddBalance(int balance1)
     {
-        balance += balance1;
+        this->card_balance += balance1;
     }
 
     int Wallet::PrintBalance()
     {
-        return balance;
+        return this->card_balance;
     }
-
 
     DebitCard::DebitCard(std::string card_name1, int card_balance1, int card_number1, std::vector<std::pair<std::string, int>> ListofCards)
             : Card(card_name1, card_balance1, ListofCards), card_number(card_number1)

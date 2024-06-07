@@ -1,5 +1,4 @@
 ﻿#pragma warning(disable : 4996)
-
 #include "expenses.h"
 
 namespace expenses
@@ -71,7 +70,6 @@ namespace expenses
             {
                 if (date_ex.day == ListofExpenses[a].getDate().day && date_ex.month == ListofExpenses[a].getDate().month && date_ex.year == ListofExpenses[a].getDate().year)
                 {
-
                     all_expenses_by_week.push_back(&ListofExpenses[a]);
                 }
             }
@@ -94,24 +92,23 @@ namespace expenses
         }
     }
 
-
-    void printTop3ExpensesByCategory(std::vector<Expenses*> ListofExpenses)
+    void printTop3ExpensesByCategory(const std::vector<Expenses>& ListofExpenses)
     {
         std::vector<std::pair<std::string, int>> categoryExpenses;
 
         for (const auto& exp : ListofExpenses)
         {
-            std::string category = exp->getCategory();
-            int amount = exp->getAmount();
+            std::string category = exp.getCategory();
+            int amount = exp.getAmount();
 
-            auto i = find_if(categoryExpenses.begin(), categoryExpenses.end(), [&category](const std::pair<std::string, int>& p)
+            auto it = std::find_if(categoryExpenses.begin(), categoryExpenses.end(), [&category](const std::pair<std::string, int>& p)
                 {
                     return p.first == category;
                 });
 
-            if (i != categoryExpenses.end())
+            if (it != categoryExpenses.end())
             {
-                i->second += amount;
+                it->second += amount;
             }
             else
             {
@@ -119,107 +116,32 @@ namespace expenses
             }
         }
 
-        sort(categoryExpenses.begin(), categoryExpenses.end(), [](const std::pair<std::string, int>& p1, const std::pair<std::string, int>& p2)
+        std::sort(categoryExpenses.begin(), categoryExpenses.end(), [](const std::pair<std::string, int>& p1, const std::pair<std::string, int>& p2)
             {
                 return p1.second > p2.second;
             });
 
         std::cout << "Top 3 Expenses by Category:" << std::endl;
-        for (int i = 0; i < std::min(3, (int)categoryExpenses.size()); ++i)
+        for (int i = 0; i < std::min(3, static_cast<int>(categoryExpenses.size())); ++i)
         {
             std::cout << "Category: " << categoryExpenses[i].first << " Total Amount: " << categoryExpenses[i].second << std::endl;
         }
     }
 
-
-    void printTop3ExpensesByCategory_week(std::vector<Expenses>& ListofExpenses)
-    {
-        std::vector<Expenses*> all_expenses_by_week= Report_Expenses_Week(ListofExpenses);
-        printTop3ExpensesByCategory(all_expenses_by_week);
-    }
-
-    void printTop3ExpensesByCategory_month(std::vector<Expenses>& ListofExpenses)
-    {
-           std::cout << "Type in the date of today: " << std::endl;
-            std::string datacopy;
-            std::cin >> datacopy;
-
-            data::Data date_ex(datacopy);
-
-            tm current_date = {};
-
-            current_date.tm_year = date_ex.year - 1900;
-            current_date.tm_mon = date_ex.month - 1;
-            current_date.tm_mday = date_ex.day;
-
-            std::vector<Expenses*> all_expenses_by_week;
-
-            for (int i = 0; i < ListofExpenses.size(); ++i)
-            {
-
-                if (date_ex.month == ListofExpenses[i].getDate().month && date_ex.year == ListofExpenses[i].getDate().year)
-                {
-                    all_expenses_by_week.push_back(&ListofExpenses[i]);
-                }
-            }
-            printTop3ExpensesByCategory(all_expenses_by_week);
-    }
-
-
     void PrintAll(std::vector<Expenses>& ListofExpenses)
     {
-        std::cout << "Type in the date of today: " << std::endl;
-        std::string datacopy;
-        std::cin >> datacopy;
-
-        data::Data date_ex(datacopy);
-
-        tm current_date = {};
-
-        current_date.tm_year = date_ex.year - 1900;
-        current_date.tm_mon = date_ex.month - 1;
-        current_date.tm_mday = date_ex.day;
-
-        int num = 0;
-        std::cout << "Type in 1 to print all of the Day." << std::endl;
-        std::cout << "Type in 2 to print all of this Week." << std::endl;
-        std::cout << "Type in 3 to print all of this Month." << std::endl;
-        std::cin >> num;
-
-        switch (num)
+        std::cout << "All Expenses:" << std::endl;
+        for (const auto& exp : ListofExpenses)
         {
-        case 1:
-        {
-            for (int i = 0; i < ListofExpenses.size(); ++i)
-            {
-                if (date_ex.day == ListofExpenses[i].getDate().day && date_ex.month == ListofExpenses[i].getDate().month && date_ex.year == ListofExpenses[i].getDate().year)
-                {
-                    std::cout << "Name: " << ListofExpenses[i].getName() << " Amount: " << ListofExpenses[i].getAmount() << std::endl;
-                }
-            }
-            break;
+            std::cout << "Name: " << exp.getName() << " Amount: " << exp.getAmount() << " Date: " << exp.getDate().day << "-" << exp.getDate().month << "-" << exp.getDate().year << " Category: " << exp.getCategory() << std::endl;
         }
-        case 2:
+    }
+    void PrintWeek(std::vector<Expenses>& ListofExpenses)
+    {
+        std::vector<Expenses*> all_expenses_by_week = Report_Expenses_Week(ListofExpenses);
+        for (auto expenses : all_expenses_by_week)
         {
-
-            std::vector<Expenses*> all_expenses_by_week = Report_Expenses_Week(ListofExpenses);
-            for (auto expenses : all_expenses_by_week)
-            {
-                std::cout << "Name: " << expenses->getName() << " Amount: " << expenses->getAmount() << std::endl;
-            }
-            break;
-        }
-        case 3:
-        {
-            for (int i = 0; i < ListofExpenses.size(); ++i)
-            {
-                if (date_ex.month == ListofExpenses[i].getDate().month && date_ex.year == ListofExpenses[i].getDate().year)
-                {
-                    std::cout << "Name: " << ListofExpenses[i].getName() << " Amount: " << ListofExpenses[i].getAmount() << std::endl;
-                }
-            }
-            break;
-        }
+            std::cout << "Name: " << expenses->getName() << " Amount: " << expenses->getAmount() << std::endl;
         }
     }
 }

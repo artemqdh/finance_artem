@@ -1,17 +1,19 @@
 ﻿#include <iostream>
 #include <vector>
 #include <string>
+#include <cassert>
+#include <string>
 
 #include "expenses.h"
 #include "finance.h"
 #include "data.h"
-
 
 std::string Request_Date()
 {
     std::string date_expenses;
     std::cout << "Input date your expenses." << std::endl;
     std::getline(std::cin, date_expenses);
+
     return date_expenses;
 }
 
@@ -26,38 +28,32 @@ int main()
     card::DebitCard new_debit_card("debitcard1", 10000, 1252777, ListofCards);
     card::CreditCard new_credit_card("creditcard1", 20000, "20.04.2027", ListofCards);
 
-    //Place for your decision
-    //...
-    data::Data newDate2;
+    ////Place for your decision
+    ////...
+    //data::Data newDate2;
 
-    try
-    {
-        data::Data newDate = Request_Date();
-    }
-    catch(std::domain_error error)
-    {
-        std::cout << error.what() << std::endl;
-        newDate2 = { "19.05.2024" };
-    }
+    //try
+    //{
+    //    data::Data newDate = Request_Date();
+    //}
+    //catch (std::domain_error error)
+    //{
+    //    std::cout << error.what() << std::endl;
+    //    newDate2 = { "19.05.2024" };
+    //}
 
     expenses::Expenses a2(5000, "bills", "07.05.2024", "House");
     expenses::Expenses a4(7500, "tax", "13.06.2024", "Work");
     expenses::Expenses a5(6000, "scholarship", "13.06.2024", "School");
     expenses::Expenses a6(5500, "newfence", "13.06.2024", "House");
 
-    
+
     ListofExpenses.push_back(a2);
     ListofExpenses.push_back(a4);
     ListofExpenses.push_back(a5);
     ListofExpenses.push_back(a6);
 
-    printTop3Expenses(ListofExpenses);
-
-    //printTop3ExpensesByCategory(ListofExpenses);
-
-    PrintAll(ListofExpenses);
-
-    while (1 == 1) 
+    while (1 == 1)
     {
         int num;
         std::cout << "---------------------------------------" << std::endl;
@@ -67,113 +63,154 @@ int main()
 
         std::cout << "1 - Buy something" << std::endl;
         std::cout << "2 - Add money" << std::endl;
+        std::cout << "3 - Show Expenses" << std::endl;
 
         std::cin >> num;
-
+        system("cls");
         switch (num)
         {
+        case 1:
+        {
+            int num1;
+            std::cout << "From what card or wallet are you buying?" << std::endl;
+
+            std::cout << "1 - Credit Card" << std::endl;
+            std::cout << "2 - Debit Card" << std::endl;
+            std::cout << "3 - Wallet" << std::endl;
+
+            std::cin >> num1;
+
+            switch (num1)
+            {
             case 1:
             {
-                int num1;
-                std::cout << "From what card or wallet are you buying?" << std::endl;
+                std::cout << "What are you buying? (1) Type in the date when you bought it, (2) the name, (3) how much it costs and (4) the category:" << std::endl;
+                int amount1 = 0;
+                std::string name1;
+                std::string date1;
+                std::string category1;
+                std::cin >> date1 >> name1 >> amount1 >> category1;
 
-                std::cout << "1 - Credit Card" << std::endl;
-                std::cout << "2 - Debit Card" << std::endl;
-                std::cout << "3 - Wallet" << std::endl;
+                expenses::Expenses new_expense(amount1, name1, date1, category1);
 
-                std::cin >> num1;
+                ListofExpenses.push_back(new_expense);
 
-                switch (num1)
-                {
-                    case 1:
-                    {
-                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
-                        std::string name1;
-                        int amount1 = 0;
-                        std::string date1;
-                        std::string category1;
-                        expenses::Expenses new_expense(amount1, name1, date1, category1);
-
-                        ListofExpenses.push_back(new_expense);
-
-                        new_credit_card.WithdrawCard(amount1);
-                        break;
-                    }
-                    case 2:
-                    {
-                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
-                        std::string name1;
-                        int amount1 = 0;
-                        std::string date1;
-                        std::string category1;
-                        expenses::Expenses new_expense(amount1, name1, date1, category1);
-
-                        ListofExpenses.push_back(new_expense);
-
-                        new_debit_card.WithdrawCard(amount1);
-                        break;
-                    }
-                    case 3:
-                    {
-                        std::cout << "What are you buying? (1) Type in the name, (2) how much it costs, (3) the category and (4) the date when you bought it:" << std::endl;
-                        std::string name1;
-                        int amount1 = 0;
-                        std::string date1;
-                        std::string category1;
-                        expenses::Expenses new_expense(amount1, name1, date1, category1);
-
-                        ListofExpenses.push_back(new_expense);
-
-                        new_wallet.WithdrawCard(amount1);
-                        break;
-                    }
-                }break;
+                new_credit_card.WithdrawCard(amount1);
+                break;
             }
             case 2:
             {
-                int num2;
-                std::cout << "Where do you want to add money?" << std::endl;
+                std::cout << "What are you buying? (1) Type in the date when you bought it, (2) the name, (3) how much it costs and (4) the category:" << std::endl;
+                int amount1 = 0;
+                std::string name1;
+                std::string date1;
+                std::string category1;
+                std::cin >> date1 >> name1 >> amount1 >> category1;
 
-                std::cout << "1 - Credit Card" << std::endl;
-                std::cout << "2 - Debit Card" << std::endl;
-                std::cout << "3 - Wallet" << std::endl;
+                expenses::Expenses new_expense(amount1, name1, date1, category1);
 
-                std::cin >> num2;
-                
-                switch (num2)
-                {
-                    case 1:
-                    {
-                        std::cout << "How much money do you want to add?" << std::endl;
-                        int amount1;
-                        std::cin >> amount1;
-                    
-                        new_credit_card.AddBalance(amount1);
+                ListofExpenses.push_back(new_expense);
 
-                        break;
-                    }
-                    case 2:
-                    {
-                        std::cout << "How much money do you want to add?" << std::endl;
-                        int amount1;
-                        std::cin >> amount1;
-
-                        new_debit_card.AddBalance(amount1);
-
-                        break;
-                    }
-                    case 3:
-                    {
-                        std::cout << "How much money do you want to add?" << std::endl;
-                        int amount1;
-                        std::cin >> amount1;
-
-                        new_wallet.AddBalance(amount1);
-
-                        break;
-                    }
-                }break;
+                new_debit_card.WithdrawCard(amount1);
+                break;
             }
+            case 3:
+            {
+                std::cout << "What are you buying? (1) Type in the date when you bought it, (2) the name, (3) how much it costs and (4) the category:" << std::endl;
+                int amount1 = 0;
+                std::string name1;
+                std::string date1;
+                std::string category1;
+                std::cin >> date1 >> name1 >> amount1 >> category1;
+
+                expenses::Expenses new_expense(amount1, name1, date1, category1);
+
+                ListofExpenses.push_back(new_expense);
+
+                new_wallet.WithdrawCard(amount1);
+                break;
+            }
+            }break;
+        }
+        case 2:
+        {
+            int num2;
+            std::cout << "Where do you want to add money?" << std::endl;
+
+            std::cout << "1 - Credit Card" << std::endl;
+            std::cout << "2 - Debit Card" << std::endl;
+            std::cout << "3 - Wallet" << std::endl;
+
+            std::cin >> num2;
+
+            switch (num2)
+            {
+            case 1:
+            {
+                std::cout << "How much money do you want to add?" << std::endl;
+                int amount1;
+                std::cin >> amount1;
+
+                new_credit_card.AddBalance(amount1);
+
+                break;
+            }
+            case 2:
+            {
+                std::cout << "How much money do you want to add?" << std::endl;
+                int amount1;
+                std::cin >> amount1;
+
+                new_debit_card.AddBalance(amount1);
+
+                break;
+            }
+            case 3:
+            {
+                std::cout << "How much money do you want to add?" << std::endl;
+                int amount1;
+                std::cin >> amount1;
+
+                new_wallet.AddBalance(amount1);
+
+                break;
+            }
+            }break;
+        }
+        case 3:
+        {
+            std::cout << "1 - Print All" << std::endl;
+            std::cout << "2 - Print Week" << std::endl;
+            std::cout << "3 - Print Top3 Expenses" << std::endl;
+            std::cout << "4 - Print Top3 Expenses by Category" << std::endl;
+
+            int num3 = 0;
+            std::cin >> num3;
+
+            switch (num3)
+            {
+                case 1:
+                {
+                    PrintAll(ListofExpenses);
+                    break;
+                }
+                case 2:
+                {
+                    PrintWeek(ListofExpenses);
+                    break;
+                }
+                case 3:
+                {
+                    printTop3Expenses(ListofExpenses);
+                    break;
+                }
+                case 4:
+                {
+                    printTop3ExpensesByCategory(ListofExpenses);
+                    break;
+                }
+            }
+        }
         }
     }
 }
