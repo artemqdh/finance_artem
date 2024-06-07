@@ -1,5 +1,6 @@
 #pragma once
 #include <stdexcept>
+#include <cassert>
 
 namespace data
 {
@@ -14,12 +15,12 @@ namespace data
             this->day = atoi(DD.c_str());
             this->month = atoi(MM.c_str());
             this->year = atoi(YY.c_str());
-            //Place for your decision
-            //...
-            if (day > 31 || month > 12 || year < 2024)
-            {
-                throw std::domain_error("Error. Date is not normal.");
-            }
+            ////Place for your decision
+            ////...
+            //if (day > 31 || month > 12 || year < 2024)
+            //{
+            //    throw std::domain_error("Error. Date is not normal.");
+            //}
         }
 
         Data operator = (const Data& rhs)

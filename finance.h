@@ -28,9 +28,6 @@ namespace card
         void AddBalance(int balance1);
         int PrintBalance();
 
-    private:
-        std::string name;
-        int balance;
     };
 
     class DebitCard : public Card
@@ -49,7 +46,6 @@ namespace card
 
     private:
         std::string expiration_date;
-        int balance;
         int maximum_credit;
     };
 }

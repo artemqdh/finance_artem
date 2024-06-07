@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-
+#include <ctime>
 #include "data.h"
 
 namespace expenses
@@ -21,14 +21,15 @@ namespace expenses
     private:
         int amount;
         std::string name;
-        std::string category;
         data::Data date;
+        std::string category;
 
         void FuncDate(std::string dateStr);
     };
-    void printTop3ExpensesByCategory(std::vector<Expenses*> ListofExpenses);
-    void printTop3Expenses(std::vector<Expenses>& ListofExpenses);
-    
 
+    std::vector<Expenses*> Report_Expenses_Week(std::vector<Expenses>& ListofExpenses);
+    void printTop3ExpensesByCategory(const std::vector<Expenses>& ListofExpenses);
+    void printTop3Expenses(std::vector<Expenses>& ListofExpenses);
     void PrintAll(std::vector<Expenses>& ListofExpenses);
+    void PrintWeek(std::vector<Expenses>& ListofExpenses);
 }
